@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Bank Customer Priority Management System using Priority Queue">
+  <title>Bank Priority Queue</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo">🏦</div>
+      <div>
+        <h1>Bank Priority Queue</h1>
+        <p>Smart Customer Management System</p>
+      </div>
+    </div>
+    <div class="status"><span class="dot"></span> System Online</div>
+  </header>
+
+  <main class="container">
+    <section class="stats-grid">
+      <div class="stat-card"><span>👥</span><div><strong id="totalCount">0</strong><small>Total Customers</small></div></div>
+      <div class="stat-card"><span>⏳</span><div><strong id="waitingCount">0</strong><small>Waiting</small></div></div>
+      <div class="stat-card"><span>✅</span><div><strong id="servedCount">0</strong><small>Served</small></div></div>
+      <div class="stat-card"><span>⭐</span><div><strong id="highCount">0</strong><small>High Priority</small></div></div>
+    </section>
+
+    <section class="dashboard">
+      <div class="panel registration">
+        <div class="panel-title">
+          <div><h2>Register Customer</h2><p>Add a customer to the priority queue.</p></div>
+          <span class="icon-badge">＋</span>
+        </div>
+
+        <form id="customerForm">
+          <label for="name">Customer Name</label>
+          <input id="name" type="text" placeholder="e.g. Rahul Patel" required>
+
+          <label for="phone">Phone Number</label>
+          <input id="phone" type="tel" placeholder="e.g. 9876543210" maxlength="10">
+
+          <label for="service">Bank Service</label>
+          <select id="service">
+            <option>Cash Deposit</option>
+            <option>Cash Withdrawal</option>
+            <option>Account Opening</option>
+            <option>Loan Enquiry</option>
+            <option>Cheque Service</option>
+            <option>Other</option>
+          </select>
+
+          <label>Priority</label>
+          <div class="priority-options">
+            <label class="priority normal"><input type="radio" name="priority" value="1" checked><span>Normal<br><small>Priority 1</small></span></label>
+            <label class="priority medium"><input type="radio" name="priority" value="2"><span>Medium<br><small>Priority 2</small></span></label>
+            <label class="priority high"><input type="radio" name="priority" value="3"><span>High<br><small>Priority 3</small></span></label>
+          </div>
+
+          <button class="primary-btn" type="submit">Add to Queue <span>→</span></button>
+        </form>
+      </div>
+
+      <div class="panel serving">
+        <div class="panel-title">
+          <div><h2>Now Serving</h2><p>Customer currently being served.</p></div>
+          <span class="live-pill">LIVE</span>
+        </div>
+        <div id="nowServing" class="now-serving empty">
+          <div class="big-token">—</div>
+          <h3>No customer</h3>
+          <p>Click “Serve Next” to start.</p>
+        </div>
+        <button id="serveNext" class="serve-btn">▶ Serve Next Customer</button>
+        <button id="resetBtn" class="danger-outline">Reset All Data</button>
+      </div>
+    </section>
+
+    <section class="panel queue-panel">
+      <div class="queue-header">
+        <div>
+          <h2>Waiting Queue</h2>
+          <p>Customers are automatically ordered by priority.</p>
+        </div>
+        <div class="queue-tools">
+          <input id="search" type="search" placeholder="🔎 Search customer...">
+          <select id="filter">
+            <option value="all">All Priorities</option>
+            <option value="3">High</option>
+            <option value="2">Medium</option>
+            <option value="1">Normal</option>
+          </select>
+        </div>
+      </div>
+      <div class="algorithm-note">
+        <span>⚙️</span>
+        <div><strong>Priority Queue Algorithm</strong><br><small>Higher priority customers are served first. Equal priorities are handled in arrival order.</small></div>
+      </div>
+      <div id="queueList" class="queue-list"></div>
+    </section>
+
+    <section class="panel history-panel">
+      <div class="panel-title">
+        <div><h2>Service History</h2><p>Recently served customers.</p></div>
+      </div>
+      <div id="historyList" class="history-list"></div>
+    </section>
+  </main>
+
+  <div id="toast" class="toast"></div>
+  <script src="script.js"></script>
+</body>
+</html>
